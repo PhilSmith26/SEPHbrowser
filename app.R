@@ -1,11 +1,16 @@
 # Shiny app for SEPH
-# August 4, 2021
+# August 10, 2021
 library(shiny)
+library(shinyjs)
 library(tidyverse)
 library(rlist)
 library(shinyWidgets)
 library(lubridate)
+library(gt)
+library(scales)
 
+source("Common_stuff.R")
+source("SEPHbrowserChoices.R")
 source("Tabl_specs.R") 
 source("Make_tablM01.R") 
 source("Make_tablM02.R") 
@@ -75,7 +80,6 @@ ui <- navbarPage(
   ),
   navbarMenu(tags$b(tags$span(style="color:blue", #9
     HTML("Table 1"))),
-    #HTML("Employment, AWE, AHE and AWH by province or territory, SA"))),
     tags$style(type='text/css', ".selectize-input { 
       font-size: 24px; line-height: 24px;} .selectize-dropdown 
       { font-size: 20px; line-height: 20px; }"),

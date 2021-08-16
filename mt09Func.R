@@ -1,57 +1,24 @@
 # Table module #9 for SEPH empl, AHE, AWE and AWH by prov, SA
-# August 3, 2021
-
-library(gt)
-library(tidyverse)
-library(lubridate)
-
-source("Tabl_specs.R")
-
-Geo1000 <- c(
-  "Canada",
-  "Newfoundland and Labrador",
-  "Prince Edward Island",     
-  "Nova Scotia",
-  "New Brunswick",
-  "Quebec",                   
-  "Ontario",
-  "Manitoba",
-  "Saskatchewan",
-  "Alberta",
-  "British Columbia",
-  "Yukon",                    
-  "Northwest Territories",
-  "Nunavut" 
-)
-trf1000 <- c(
-  "Original data (no transformation)",
-  "Index, first month = 100",
-  "One-month percentage change",
-  "Twelve-month percentage change"
-)
-e <- seq.Date(TS[[9]]$Strt,TS[[9]]$Endt,by="month")
-s <- character()
-for (i in 1:length(e)) {
-  s[i] <- format(e[i],"%b %Y")
-}
-r <- c(s[length(s)-5],s[length(s)])
+# August 3, 2021; improved August 9, 2021
 
 mt09UI <- function(id) {
   tabPanel(tags$b(tags$span(style="color:blue", HTML("Tables"))),
+    tags$b(tags$span(style="color:blue",HTML(paste0("<h2>Employment, ",
+      "AWE, AHE and AWH by province or territory, seasonally adjusted</h2><br>")))),
     prettyRadioButtons(NS(id,"Geo"),
       tags$b(tags$span(style="color:blue;font-size:20px", 
-        "Canada, province or territory:")),choices=Geo1000,bigger=TRUE,
+        "Canada, province or territory:")),choices=geo01,bigger=TRUE,
         outline=TRUE,inline=TRUE,shape="round",animation="pulse"),
     prettyRadioButtons(NS(id,"trf"),
       tags$b(tags$span(style="color:blue;font-size:20px", 
-        "Choose a transformation:")),choices=trf1000,bigger=TRUE,
+        "Choose a transformation:")),choices=trf01,bigger=TRUE,
         outline=TRUE,inline=TRUE,shape="round",animation="pulse"),
     column(2,offset=10,downloadButton(NS(id,"downloadData1"),
       label="Download table")),
     chooseSliderSkin(skin="Round",color="blue"),
     sliderTextInput(NS(id,"Dates"),label="Choose starting and ending dates:",
-      choices=s,
-      selected=r,
+      choices=getChoices(9)[[1]],
+      selected=getChoices(9)[[2]],
       dragRange = TRUE,
       width="100%"),
     tags$script(HTML(
@@ -86,17 +53,17 @@ mt09Server <- function(id) {
     })
     output$downloadData1 <- downloadHandler(
       filename=function() {
-        paste0("All_SEPH_Variables.csv")
+        paste0("SEPHdata.csv")
       },
       content=function(file) {
         write.csv(expr()[[2]],file)
       }
     )
-    observe({ # monthly table update
+    observe({
       updateSliderTextInput(session,inputId="Dates",
         label="Choose starting and ending dates:",
-        choices=s,
-        selected=r)
+        choices=getChoices(9)[[1]],
+        selected=getChoices(9)[[2]])
       tags$script(HTML(
         "$('.shiny-input-container:has(input[id=\"idmt09-Dates\"])>label')
         .css({fontFamily:'helvetica',fontWeight:900,fontSize:'20px',color:'blue'})"))

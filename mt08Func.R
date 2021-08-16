@@ -1,55 +1,28 @@
 # Table module #8 for SEPH empl, AHE, AWE and AWH by ind, SA
 # August 3, 2021
 
-library(gt)
-library(tidyverse)
-library(lubridate)
-
-source("Tabl_specs.R")
-
-Est11000 <- c(
-  "Employment",                                 
-  "Average weekly earnings including overtime",
-  "Average hourly earnings including overtime", 
-  "Average weekly hours" 
-)
-Typ1000 <- c(
-  "Employees paid by the hour",             
-  "Salaried employees paid a fixed salary"
-)
-trf1000 <- c(
-  "Original data (no transformation)",
-  "Index, first month = 100",
-  "One-month percentage change",
-  "Twelve-month percentage change"
-)
-e <- seq.Date(TS[[8]]$Strt,TS[[8]]$Endt,by="month")
-s <- character()
-for (i in 1:length(e)) {
-  s[i] <- format(e[i],"%b %Y")
-}
-r <- c(s[length(s)-5],s[length(s)])
-
 mt08UI <- function(id) {
   tabPanel(tags$b(tags$span(style="color:blue", HTML("Tables"))),
+    tags$b(tags$span(style="color:blue",HTML(paste0("<h2>Employment, ",
+      "AWE, AHE and AWH by industry, seasonally adjusted</h2><br>")))),
     prettyRadioButtons(NS(id,"Est"),
       tags$b(tags$span(style="color:blue;font-size:20px", 
-        "Employment or AWE or AHE or AWH:")),choices=Est11000,bigger=TRUE,
+        "Employment or AWE or AHE or AWH:")),choices=est02,bigger=TRUE,
         outline=TRUE,inline=TRUE,shape="round",animation="pulse"),
     prettyRadioButtons(NS(id,"Typ"),
       tags$b(tags$span(style="color:blue;font-size:20px", 
-        "Type of employee:")),choices=Typ1000,bigger=TRUE,
+        "Type of employee:")),choices=typ01,bigger=TRUE,
         outline=TRUE,inline=TRUE,shape="round",animation="pulse"),
     prettyRadioButtons(NS(id,"trf"),
       tags$b(tags$span(style="color:blue;font-size:20px", 
-        "Choose a transformation:")),choices=trf1000,bigger=TRUE,
+        "Choose a transformation:")),choices=trf01,bigger=TRUE,
         outline=TRUE,inline=TRUE,shape="round",animation="pulse"),
     column(2,offset=10,downloadButton(NS(id,"downloadData1"),
       label="Download table")),
     chooseSliderSkin(skin="Round",color="blue"),
     sliderTextInput(NS(id,"Dates"),label="Choose starting and ending dates:",
-      choices=s,
-      selected=r,
+      choices=getChoices(8)[[1]],
+      selected=getChoices(8)[[2]],
       dragRange = TRUE,
       width="100%"),
     tags$script(HTML(
@@ -85,22 +58,20 @@ mt08Server <- function(id) {
     })
     output$downloadData1 <- downloadHandler(
       filename=function() {
-        paste0("Employment_or_AWE_or_AHE_or_AWH.csv")
+        paste0("SEPHdata.csv")
       },
       content=function(file) {
         write.csv(expr()[[2]],file)
       }
     )
-    observe({ # monthly table update
+    observe({
       updateSliderTextInput(session,inputId="Dates",
         label="Choose starting and ending dates:",
-        choices=s,
-        selected=r)
+        choices=getChoices(8)[[1]],
+        selected=getChoices(8)[[2]])
       tags$script(HTML(
         "$('.shiny-input-container:has(input[id=\"idmt08-Dates\"])>label')
         .css({fontFamily:'helvetica',fontWeight:900,fontSize:'20px',color:'blue'})"))
     })
-    observeEvent(input$Est, {
-      cat("input Est is ",input$Est)})
   })
 }

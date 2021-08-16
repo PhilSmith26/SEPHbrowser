@@ -1,15 +1,7 @@
 # Make_tablM08() function - SEPH employment or AWE or AHE or AWH by industry, SA
-# August 3, 2021
+# August 3, 2021; improved August 9, 2021
 
-library(gt)
-library(tidyverse)
-library(lubridate)
-
-source("Tabl_specs.R")
-
-#===============================================================================
 Make_tablM08 <- function(Est1,Typ1,type,month1,month2) {
-  #browser()
   q0 <- readRDS(paste0("rds/",TS[[8]]$STCno,".rds"))
   colnam1 <- seq.Date(month1,month2,by="month")
   colnam2 <- vector()

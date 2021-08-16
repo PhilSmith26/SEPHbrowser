@@ -1,13 +1,6 @@
 # Make_tablM01() function - SEPH employment by industry and province
-# July 30, 2021
+# July 30, 2021; improved August 9, 2021
 
-library(gt)
-library(tidyverse)
-library(lubridate)
-
-source("Tabl_specs.R")
-
-#===============================================================================
 Make_tablM01 <- function(Geo1,Kin1,type,month1,month2) {
   q0 <- readRDS(paste0("rds/",TS[[1]]$STCno,".rds"))
   colnam1 <- seq.Date(month1,month2,by="month")

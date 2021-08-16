@@ -1,13 +1,6 @@
 # Make_tablM11() function - SEPH AWH by industry and province, NSA
-# August 3, 2021
+# August 3, 2021; improved August 10, 2021
 
-library(gt)
-library(tidyverse)
-library(lubridate)
-
-source("Tabl_specs.R")
-
-#===============================================================================
 Make_tablM11 <- function(Geo1,Ovt1,type,month1,month2) {
   q0 <- readRDS(paste0("rds/",TS[[11]]$STCno,".rds"))
   colnam1 <- seq.Date(month1,month2,by="month")

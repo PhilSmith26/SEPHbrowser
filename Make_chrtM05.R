@@ -1,11 +1,5 @@
 # Make_chrtM05() function - SEPH standard work week for salaried empl by industry and province
-# August 2, 2021
-library(lubridate)
-
-pkgs <- c("tidyverse","scales","tibble","stringr","rlang","lubridate")
-inst <- lapply(pkgs,library,character.only=TRUE)
-
-source("Common_stuff.R")
+# August 2, 2021; improved August 10, 2021
 
 Make_chrtM05 <- function(NAICS1,Geo1,Seas1,type,month1,month2,
   altTitl,interv) {

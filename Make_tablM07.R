@@ -1,13 +1,6 @@
 # Make_tablM07() function - SEPH Aemployment and AWE by industrym SA
-# August 2, 2021
+# August 2, 2021; improved August 9, 2021
 
-library(gt)
-library(tidyverse)
-library(lubridate)
-
-source("Tabl_specs.R")
-
-#===============================================================================
 Make_tablM07 <- function(Est1,type,month1,month2) {
   #browser()
   q0 <- readRDS(paste0("rds/",TS[[7]]$STCno,".rds"))

@@ -1,11 +1,5 @@
 # Make_chrtM02() function - SEPH AWE by industry and province
-# August 2, 2021
-library(lubridate)
-
-pkgs <- c("tidyverse","scales","tibble","stringr","rlang","lubridate")
-inst <- lapply(pkgs,library,character.only=TRUE)
-
-source("Common_stuff.R")
+# August 2, 2021; improved August 9, 2021
 
 Make_chrtM02 <- function(NAICS1,Geo1,Kin1,Ovr1,Seas1,type,month1,month2,
   altTitl,interv) {

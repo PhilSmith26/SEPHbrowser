@@ -2,6 +2,17 @@
 library(seasonal)
 source("Tabl_specs.R")
 
+getChoices <- function(tabno) {
+  e <- seq.Date(TS[[tabno]]$Strt,TS[[tabno]]$Endt,by="month")
+  s <- character()
+  for (i in 1:length(e)) {
+    s[i] <- format(e[i],"%b %Y")
+  }
+  r1 <- c(s[length(s)-6],s[length(s)])
+  r2 <- c(s[1],s[length(s)])
+  resultList <- list(s,r1,r2)
+}
+
 IDX <- function(x) {y <- round(100*x/x[1],1)}
 PC <- function(x) {y <- round(100*(x/lag(x)-1),1)}
 PC12 <- function(x) {y <- round(100*(x/lag(x,12)-1),1)}

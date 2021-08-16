@@ -1,11 +1,5 @@
 # Make_chrtM08() function - SEPH employment, AWE, AHE and AWH by industry, SA
-# August 3, 2021
-library(lubridate)
-
-pkgs <- c("tidyverse","scales","tibble","stringr","rlang","lubridate")
-inst <- lapply(pkgs,library,character.only=TRUE)
-
-source("Common_stuff.R")
+# August 3, 2021; improved August 9, 2021
 
 Make_chrtM08 <- function(NAICS1,Est1,Typ1,type,month1,month2,altTitl,interv) {
   #browser()

@@ -1,13 +1,6 @@
 # Make_tablM09() function - SEPH employment or AWE or AHE or AWH by prov, SA
-# August 3, 2021
+# August 3, 2021; improved August 9, 2021
 
-library(gt)
-library(tidyverse)
-library(lubridate)
-
-source("Tabl_specs.R")
-
-#===============================================================================
 Make_tablM09 <- function(Geo1,type,month1,month2) {
   #browser()
   q0 <- readRDS(paste0("rds/",TS[[9]]$STCno,".rds"))

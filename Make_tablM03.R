@@ -1,15 +1,7 @@
 # Make_tablM03() function - SEPH AHE by industry and province
-# August 2, 2021
+# August 2, 2021; improved August 10, 2021
 
-library(gt)
-library(tidyverse)
-library(lubridate)
-
-source("Tabl_specs.R")
-
-#===============================================================================
 Make_tablM03 <- function(Geo1,Ovr1,type,month1,month2) {
-  #browser()
   q0 <- readRDS(paste0("rds/",TS[[3]]$STCno,".rds"))
   colnam1 <- seq.Date(month1,month2,by="month")
   colnam2 <- vector()

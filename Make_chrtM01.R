@@ -1,11 +1,5 @@
 # Make_chrtM01() function - SEPH employment by industry and province
-# July 30, 2021
-library(lubridate)
-
-pkgs <- c("tidyverse","scales","tibble","stringr","rlang","lubridate")
-inst <- lapply(pkgs,library,character.only=TRUE)
-
-source("Common_stuff.R")
+# July 30, 2021; improved August 9, 2021
 
 Make_chrtM01 <- function(NAICS1,Geo1,Kin1,Seas1,type,month1,month2,
   altTitl,interv) {

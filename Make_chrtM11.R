@@ -1,15 +1,8 @@
 # Make_chrtM11() function - SEPH AWH by industry and province, NSA
-# August 3, 2021
-library(lubridate)
-
-pkgs <- c("tidyverse","scales","tibble","stringr","rlang","lubridate")
-inst <- lapply(pkgs,library,character.only=TRUE)
-
-source("Common_stuff.R")
+# August 3, 2021; improved August 10, 2021
 
 Make_chrtM11 <- function(NAICS1,Geo1,Ovt1,Seas1,type,month1,month2,
   altTitl,interv) {
-  #browser()
   q0 <- readRDS(paste0("rds/",TS[[11]]$STCno,".rds"))
   q0 <- filter(q0,GEO==Geo1)
   q0 <- filter(q0,OVT==Ovt1)

@@ -1,11 +1,5 @@
 # Make_chrtM09() function - SEPH employment, AWE, AHE and AWH by prov, SA
-# August 3, 2021
-library(lubridate)
-
-pkgs <- c("tidyverse","scales","tibble","stringr","rlang","lubridate")
-inst <- lapply(pkgs,library,character.only=TRUE)
-
-source("Common_stuff.R")
+# August 3, 2021; improved August 9, 2021
 
 Make_chrtM09 <- function(Est1,Geo1,type,month1,month2,altTitl,interv) {
   q0 <- readRDS(paste0("rds/",TS[[9]]$STCno,".rds"))
